@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-1669688d3ec-33c9841c29315b58" provider="generic" driver="derby" name="Derby - desafio" save-password="true" show-system-objects="true" show-util-objects="true" read-only="false">
+		<connection server="" database="memory:desafio" url="jdbc:derby:memory:desafio" user="desafio" password="FwEVIUdKS3bk" type="dev"/>
+	</data-source>
+	<filters/>
+</data-sources>

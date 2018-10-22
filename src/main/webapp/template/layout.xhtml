@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta charset="utf-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<meta name="description" content="A layout example that shows off a responsive email layout." />
+		
+		<title>Desafio 01 - FPC UFBa</title>
+		
+		<style type="text/css">
+		    .ui-widget {
+				font-size: 14px !important;
+			}
+			a {
+			  color:inherit;
+			  text-decoration: none;
+			 }
+	  	</style>	
+		
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous" />
+		<!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="css/layouts/email.css" />
+        <!--<![endif]-->
+        
+	</h:head>
+	
+	<h:body>
+		
+		<p:growl id="growl" showDetail="true"/>	
+		<div id="layout" class="content pure-g">
+			<ui:insert name="menu" >
+	          <ui:include src="/template/menu.xhtml" />
+	        </ui:insert>
+	        
+	        <ui:insert name="listaMensagem" >
+	          <ui:include src="/template/list.xhtml" />
+	        </ui:insert>
+	        
+	        <ui:insert name="listaMensagem" >
+	          <ui:include src="/template/content.xhtml" />
+	        </ui:insert>
+		</div>
+		
+		<ui:insert name="modal" >
+		</ui:insert>			
+	</h:body>
+</html>

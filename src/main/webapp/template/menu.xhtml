@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	
+	<ui:composition>
+		<div id="nav" class="pure-u">	
+	        <div class="nav-inner">
+		        <h:form id="formEscrever">
+		        	<p:commandButton value="Escrever" id="btnEscrever" onclick="PF('modalEscrever').show();" styleClass="primary-button pure-button" />		            
+				</h:form>
+	            <div class="pure-menu">
+	                <ul class="pure-menu-list">
+	                    <li class="pure-menu-item">
+	                    	<p:link outcome="index" value="Emails Enviados" styleClass="pure-menu-link" />
+	                    </li>
+	                    <!-- <li class="pure-menu-item"><a href="#" class="pure-menu-link">Entrada <span class="email-count">(2)</span></a></li>
+	                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Enviados</a></li>
+	                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Rascunhos</a></li>
+	                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Lixeira</a></li> -->
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</ui:composition>		
+	
+</html>

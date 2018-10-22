@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="Desafio">
+		<property name="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
+		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+		<property name="hibernate.connection.url">jdbc:derby:memory:desafio;create=true</property>
+		<property name="hibernate.connection.username">desafio</property>
+		<property name="hibernate.connection.password">desafio</property>
+		<property name="hibernate.connection.pool_size">1</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<!-- SQL -->
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- CLASSES -->
+		<mapping class="br.ufba.fpc.desafio01.models.Mensagem" />
+		<mapping class="br.ufba.fpc.desafio01.models.Usuario" />
+		<mapping class="br.ufba.fpc.desafio01.models.Destinatario" />
+	</session-factory>
+</hibernate-configuration>

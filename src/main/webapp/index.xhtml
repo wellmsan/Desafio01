@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" >
+
+	<ui:composition template="/template/layout.xhtml">
+		
+		<ui:define name="listEmail">
+			<h:form id="formPesquisa" styleClass="pure-form">
+				<p:outputPanel deferred="true">
+			        <h3>Encontrar Mensagens</h3>
+			        <div class="ui-g">
+					    <div class="ui-g-12">
+					    	<h:outputLabel for="pesquisaTitulo" value="Título da Pesquisa" /><br/>
+					    	<p:inputText id="pesquisaTitulo" value="#{mensagemBean.pesquisaTitulo}" size="40" required="true" requiredMessage="Informe o título da pesquisa!" />
+					    </div>
+					</div>
+					<div class="ui-g">
+					    <div class="ui-g-8">
+					    	<h:outputLabel for="pesquisaPor" value="Pesquisar Por:" /><br/>
+					    	<p:selectOneRadio id="pesquisaPor" value="#{mensagemBean.pesquisaPor}" required="true" requiredMessage="Selecione o tipo de pesquisa!">
+					            <f:selectItem itemLabel="Destinatário" itemValue="destinatario" />
+					            <f:selectItem itemLabel="Assunto" itemValue="assunto" />
+					        </p:selectOneRadio>
+					    </div>
+					    <div class="ui-g-4">
+					    	<p:commandButton value="Listar" style="float: right;" styleClass="button-success pure-button" 
+					    	 	update=":formListEmail, :growl" action="#{mensagemBean.pesquisaEmail()}"/>
+					    </div>
+					</div>
+			    </p:outputPanel>
+			</h:form>
+			<h:form id="formListEmail">			    
+			    <p:repeat var="mensagem" value="#{mensagemBean.all}" >
+			    
+			    	<p:commandLink update=":formEmailDetail:emailDetail">
+		                <f:setPropertyActionListener value="#{mensagem}" target="#{mensagemBean.mensagemSelecionda}" />
+		            
+				    	<div class="email-item email-item-selected pure-g">
+	            			<div class="pure-u-3-4">
+				                <h4 class="email-name"><h:outputText value="#{mensagem.assunto}" /></h4>
+				                <h5 class="email-subject">
+									<p:repeat value="#{mensagem.destinaratios}" var="destinatario">	
+							        	<h:outputText value="#{destinatario.email}" /><br/>
+							        </p:repeat>
+								</h5>			                
+				                <p style="float: right;">
+				                    <small>
+								    	<h:outputText value="#{mensagem.dataEnvio}">
+							            	<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+							            </h:outputText>
+						            </small>
+				                </p>
+				            </div>
+	        			</div>
+        			</p:commandLink>
+        			
+			    </p:repeat>
+			</h:form>
+		</ui:define>
+		
+		<ui:define name="modal">
+			<!-- MODAL ESCREVER EMAIL -->
+			<p:dialog header="Escrever Mensagem" widgetVar="modalEscrever" modal="true" height="480" width="500" resizable="false">
+				<h:form id="formEscreveEmail">		
+				
+					<div class="ui-g" styleClass="pure-form">
+					    <div class="ui-g-12">
+					    	<h:outputLabel for="destinatario" value="Destinatários:"  /><br/>
+					    	<p:inputText id="destinatario" value="#{mensagemBean.destinatario}" size="60" required="true" /><br />
+					    	<small style="color: red;">Para vários destinatários, separe-os por ponto e vígula ";".</small>
+					    </div>
+					</div>
+					
+					<div class="ui-g">
+					    <div class="ui-g-12">
+					    	<h:outputLabel for="assunto" value="Assunto:" /><br/>
+					    	<p:inputText id="assunto" value="#{mensagemBean.bean.assunto}" size="60" required="true"/>
+					    </div>
+					</div>
+					
+					<div class="ui-g">
+					    <div class="ui-g-12">
+					    	<h:outputLabel for="mensagem" value="Mensagem:" /><br/>
+					    	<!-- <p:inputTextarea id="mensagem" value="#{mensagemBean.bean.mensagem}" cols="62" rows="10" /> -->
+					    	<p:textEditor widgetVar="mensagem" value="#{mensagemBean.bean.mensagem}" height="200" style="margin-bottom:10px" placeholder="Digite sua mensagem">
+						        <f:facet name="toolbar">
+						             <span class="ql-formats">
+						                <button class="ql-bold"></button>
+						                <button class="ql-italic"></button>
+						                <button class="ql-underline"></button>
+						                <button class="ql-strike"></button>
+						            </span>
+						            <span class="ql-formats">
+						                <select class="ql-font"></select>
+						                <select class="ql-size"></select>
+						            </span>
+						        </f:facet>
+						    </p:textEditor>
+					    </div>
+					</div>	
+					
+					<div class="ui-g">
+					    <div class="ui-g-12">
+					    	<p:commandButton value="Enviar" style="float: right;" styleClass="button-success pure-button" update="formEscreveEmail, :formListEmail, :growl"
+			    				actionListener="#{mensagemBean.enviarEmail()}" onsuccess="PF('modalEscrever').hide()" />
+					    </div>
+					</div>
+			                                
+		    	</h:form>
+			</p:dialog>
+			
+		</ui:define>
+		
+		<ui:define name="contentEmail">
+			<h:form id="formEmailDetail">
+				<p:outputPanel id="emailDetail" styleClass="email-content" style="width: 100%;">
+				<p:panelGrid rendered="#{not empty mensagemBean.mensagemSelecionda}">
+					<div class="email-content-header pure-g">
+		                <div class="pure-u-1-2">
+		                    <h1 class="email-content-title"><h:outputText value="#{mensagemBean.mensagemSelecionda.assunto}" /></h1>
+		                    <p class="email-content-subtitle">
+		                        Para <p:repeat value="#{mensagem.destinaratios}" var="destinatario">	
+							        	<a><h:outputText value="#{destinatario.email}" />, </a>
+							        </p:repeat> em <span><h:outputText value="#{mensagemBean.mensagemSelecionda.dataEnvio}" ><f:convertDateTime pattern="dd/MM/yyyy HH:mm" /></h:outputText></span>
+		                    </p>
+		                </div>
+		            </div>
+		
+		            <div class="email-content-body">
+		                <h:outputText value="#{mensagemBean.mensagemSelecionda.mensagem}" escape="false"/>
+		            </div>
+				</p:panelGrid>	
+				<p:panelGrid rendered="#{empty mensagemBean.mensagemSelecionda}">
+					<div class="email-content-header pure-g">
+		                <div class="pure-u-1-2">
+		                    <h1 class="email-content-title">Nenhuma mensagem selecionada!</h1>
+		                </div>
+		            </div>
+				</p:panelGrid>					
+				</p:outputPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>	
+	
+</html>

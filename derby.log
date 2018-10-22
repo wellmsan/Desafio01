@@ -1,0 +1,20 @@
+----------------------------------------------------------------
+Sun Oct 21 22:52:59 BRT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0166-9979-a8b8-00000dbe6670 
+on database directory memory:D:\Sistemas\Java\Web\FPC\Desafio01\desafio with class loader WebappClassLoader
+  context: /Desafio01
+  delegate: false
+  repositories:
+    /WEB-INF/classes/
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: sun.misc.Launcher$AppClassLoader@5c647e05]
+ 
+Loaded from file:/D:/Sistemas/Java/Web/FPC/Desafio01/target/Desafio01/WEB-INF/lib/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_171-b11
+user.dir=D:\Sistemas\Java\Web\FPC\Desafio01
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
